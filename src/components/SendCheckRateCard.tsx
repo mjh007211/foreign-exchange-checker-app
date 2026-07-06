@@ -1,0 +1,13 @@
+export default function SendCheckRateCard() {
+  return (
+    <div className="bg-neutral-600 flex flex-col gap-5 rounded-2xl p-5">
+      <h4 className="text-neutral-100 text-[14px]">SEND</h4>
+      <div className="flex justify-between items-center">
+        <input
+          className="text-[40px] font-bold w-[123px] h-10 rounded-8"
+          type="text"
+        />
+      </div>
+    </div>
+  );
+}
