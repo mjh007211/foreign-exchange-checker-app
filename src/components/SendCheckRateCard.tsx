@@ -12,8 +12,8 @@ export default function SendCheckRateCard({ cardTitle }: Props) {
       </h4>
       <div className="flex justify-between items-center">
         <input
-          // placeholder={cardTitle === "SEND" ? "1000" : "853.02"}
-          className="text-[40px] font-bold w-fit max-w-[123px] h-10 rounded-8"
+          value={cardTitle === "SEND" ? "1,000" : "853.02"}
+          className={`text-[40px] font-bold w-fit max-w-[142px] h-10 rounded-8 ${cardTitle === "RECEIVE" ? "text-lime-500" : ""}`}
           type="text"
         />
         <SendCurrencyPickDropDownMenu />
