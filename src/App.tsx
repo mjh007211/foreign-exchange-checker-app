@@ -16,7 +16,7 @@ const navigateText = ["HISTORY", "COMPARE", "FAVORITES", "LOG"];
 function App() {
   const [activeNav, setActiveNav] = useState("HISTORY");
 
-  const handleActiveNav = (text) => {
+  const handleActiveNav = (text: string) => {
     setActiveNav(text);
   };
 

@@ -1,5 +1,3 @@
-import KSA from "../assets/flags/sa.webp";
-
 export default function FavoritesList() {
   return (
     <div className="flex justify-between  bg-neutral-600 rounded-10 py-3 px-3.5">
