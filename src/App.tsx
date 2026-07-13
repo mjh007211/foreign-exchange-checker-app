@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { FavoritedButton } from "./components/FavoritedButton";
 import Header from "./components/Header";
@@ -10,15 +10,43 @@ import NavBar from "./components/NavBar";
 import SendCheckRateCard from "./components/SendCheckRateCard";
 import SwapButton from "./components/SwapButton";
 import RenderNav from "./components/RenderNav";
+import { currencyFlags } from "./countriesFlags";
+
+export type CountriesData = {
+  iso_code: string;
+  name: string;
+};
 
 const navigateText = ["HISTORY", "COMPARE", "FAVORITES", "LOG"];
 
 function App() {
+  const [countries, setCountries] = useState<CountriesData[] | null>(null);
   const [activeNav, setActiveNav] = useState("HISTORY");
 
   const handleActiveNav = (text: string) => {
     setActiveNav(text);
   };
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const response = await fetch("https://api.frankfurter.dev/v2/currencies");
+      const data = await response.json();
+      const countriesData: CountriesData[] = data.map(
+        ({ iso_code, name }: CountriesData) => ({
+          iso_code,
+          name,
+        }),
+      );
+
+      const countriesWithFlags = countriesData.filter(
+        ({ iso_code }) => currencyFlags[iso_code],
+      );
+
+      setCountries(countriesWithFlags);
+    };
+
+    fetchCountries();
+  }, []);
 
   return (
     <div>
@@ -32,7 +60,7 @@ function App() {
           <div className="px-5">
             <div className="flex gap-6">
               <div className="flex-1">
-                <SendCheckRateCard cardTitle="SEND" />
+                <SendCheckRateCard countries={countries} cardTitle="SEND" />
               </div>
               <div className="self-center">
                 <SwapButton />
