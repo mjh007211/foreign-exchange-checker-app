@@ -25,11 +25,11 @@ type Props = {
   popularCurrencies: CountriesData[] | null;
 };
 
-export function SendCurrencyPickDropDownMenu({
+export function ReceiveCurrencyPickDropDownMenu({
   countries,
   popularCurrencies,
 }: Props) {
-  const { handleSendCurrency, selectedCurrencies } = useCurrency();
+  const { handleReceiveCurrency, selectedCurrencies } = useCurrency();
   const [open, setOpen] = useState(false);
 
 
@@ -53,10 +53,12 @@ export function SendCurrencyPickDropDownMenu({
           >
             <img
               className="w-5 h-5 bg-none"
-              src={currencyFlags[selectedCurrencies.sendCurrency]}
+              src={currencyFlags[selectedCurrencies.receiveCurrency]}
               alt=""
             />
-            <h5 className="text-[14px]">{selectedCurrencies.sendCurrency}</h5>
+            <h5 className="text-[14px]">
+              {selectedCurrencies.receiveCurrency}
+            </h5>
             <svg
               width="12"
               height="12"
@@ -98,7 +100,7 @@ export function SendCurrencyPickDropDownMenu({
         <DropdownMenuGroup className="p-2 flex flex-col gap-5">
           {popularCurrencies?.map(({ iso_code, name }) => (
             <div
-              onClick={() => handleSendCurrency(iso_code)}
+              onClick={() => handleReceiveCurrency(iso_code)}
               key={iso_code}
               className="flex justify-between items-center cursor-pointer"
             >
@@ -107,7 +109,7 @@ export function SendCurrencyPickDropDownMenu({
                 <h4 className="text-[14px] text-neutral-50">{iso_code}</h4>
                 <h5>{name}</h5>
               </div>
-              {selectedCurrencies.sendCurrency === iso_code && (
+              {selectedCurrencies.receiveCurrency === iso_code && (
                 <div>
                   <img src={CheckIcon} alt="" />
                 </div>
@@ -123,7 +125,7 @@ export function SendCurrencyPickDropDownMenu({
         <DropdownMenuGroup>
           {countries?.map(({ iso_code, name }) => (
             <div
-              onClick={() => handleSendCurrency(iso_code)}
+              onClick={() => handleReceiveCurrency(iso_code)}
               key={iso_code}
               className="flex justify-between items-center cursor-pointer py-3 px-2 hover:border rounded-4 hover:border-neutral-200"
             >
@@ -132,7 +134,7 @@ export function SendCurrencyPickDropDownMenu({
                 <h4 className="text-[14px] text-neutral-50">{iso_code}</h4>
                 <h5>{name}</h5>
               </div>
-              {selectedCurrencies.sendCurrency === iso_code && (
+              {selectedCurrencies.receiveCurrency === iso_code && (
                 <div>
                   <img src={CheckIcon} alt="" />
                 </div>

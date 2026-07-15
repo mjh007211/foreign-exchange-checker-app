@@ -7,10 +7,11 @@ import HistoryCard from "./components/HistoryCard";
 import LiveMarketsBar from "./components/LiveMarketsBar";
 import { LogButton } from "./components/LogButton";
 import NavBar from "./components/NavBar";
-import SendCheckRateCard from "./components/SendCheckRateCard";
+import SendCheckRateCard from "./components/CheckRateCard";
 import SwapButton from "./components/SwapButton";
 import RenderNav from "./components/RenderNav";
 import { currencyFlags } from "./countriesFlags";
+import useCurrency from "./hooks/useCurrency";
 
 export type CountriesData = {
   iso_code: string;
@@ -66,7 +67,7 @@ function App() {
                 <SwapButton />
               </div>
               <div className="flex-1">
-                <SendCheckRateCard cardTitle="RECEIVE" />
+                <SendCheckRateCard countries={countries} cardTitle="RECEIVE" />
               </div>
             </div>
           </div>
