@@ -29,10 +29,17 @@ export function ReceiveCurrencyPickDropDownMenu({
   countries,
   popularCurrencies,
 }: Props) {
+  const [searchCurrency, setSearchCurrency] = useState("");
   const { handleReceiveCurrency, selectedCurrencies } = useCurrency();
   const [open, setOpen] = useState(false);
 
+  const handleSearchCurrency = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchCurrency(event.target?.value);
+  };
 
+  const searchedCurrencies = countries?.filter((currency) =>
+    currency.iso_code.toLowerCase().includes(searchCurrency.toLowerCase()),
+  );
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -81,6 +88,10 @@ export function ReceiveCurrencyPickDropDownMenu({
         <DropdownMenuGroup>
           <div className="relative">
             <input
+              onKeyDown={(e) => e.stopPropagation()}
+              onPointerDown={(e) => e.stopPropagation()}
+              value={searchCurrency}
+              onChange={handleSearchCurrency}
               className="py-3 w-full pl-9 placeholder:text-neutral-200 rounded-6 border border-neutral-200"
               placeholder="Search currencies..."
               type="text"
@@ -92,56 +103,92 @@ export function ReceiveCurrencyPickDropDownMenu({
             />
           </div>
         </DropdownMenuGroup>
-        <div className="flex p-2 justify-between items-center mt-2.5">
-          <h4>POPULAR</h4>
-          <span>{popularCurrencies?.length}</span>
-        </div>
         <DropdownMenuSeparator className="bg-neutral-400" />
-        <DropdownMenuGroup className="p-2 flex flex-col gap-5">
-          {popularCurrencies?.map(({ iso_code, name }) => (
-            <div
-              onClick={() => handleReceiveCurrency(iso_code)}
-              key={iso_code}
-              className="flex justify-between items-center cursor-pointer"
-            >
-              <div className="flex items-center gap-2.5">
-                <img className="w-5 h-5" src={currencyFlags[iso_code]} alt="" />
-                <h4 className="text-[14px] text-neutral-50">{iso_code}</h4>
-                <h5>{name}</h5>
-              </div>
-              {selectedCurrencies.receiveCurrency === iso_code && (
-                <div>
-                  <img src={CheckIcon} alt="" />
-                </div>
-              )}
+        {!searchCurrency ? (
+          <>
+            <div className="flex p-2 justify-between items-center mt-2.5">
+              <h4>POPULAR</h4>
+              <span>{popularCurrencies?.length}</span>
             </div>
-          ))}
-        </DropdownMenuGroup>
-        <div className="flex p-2 justify-between items-center">
-          <h4>OTHER CURRENCIES</h4>
-          <span>{countries?.length}</span>
-        </div>
-        <DropdownMenuSeparator className="bg-neutral-400" />
-        <DropdownMenuGroup>
-          {countries?.map(({ iso_code, name }) => (
-            <div
-              onClick={() => handleReceiveCurrency(iso_code)}
-              key={iso_code}
-              className="flex justify-between items-center cursor-pointer py-3 px-2 hover:border rounded-4 hover:border-neutral-200"
-            >
-              <div className="flex items-center gap-2.5">
-                <img className="w-5 h-5" src={currencyFlags[iso_code]} alt="" />
-                <h4 className="text-[14px] text-neutral-50">{iso_code}</h4>
-                <h5>{name}</h5>
-              </div>
-              {selectedCurrencies.receiveCurrency === iso_code && (
-                <div>
-                  <img src={CheckIcon} alt="" />
+            <DropdownMenuGroup className="p-2 flex flex-col gap-5">
+              {popularCurrencies?.map(({ iso_code, name }) => (
+                <div
+                  onClick={() => handleReceiveCurrency(iso_code)}
+                  key={iso_code}
+                  className="flex justify-between items-center cursor-pointer"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <img
+                      className="w-5 h-5"
+                      src={currencyFlags[iso_code]}
+                      alt=""
+                    />
+                    <h4 className="text-[14px] text-neutral-50">{iso_code}</h4>
+                    <h5>{name}</h5>
+                  </div>
+                  {selectedCurrencies.receiveCurrency === iso_code && (
+                    <div>
+                      <img src={CheckIcon} alt="" />
+                    </div>
+                  )}
                 </div>
-              )}
+              ))}
+            </DropdownMenuGroup>
+            <div className="flex p-2 justify-between items-center">
+              <h4>OTHER CURRENCIES</h4>
+              <span>{countries?.length}</span>
             </div>
-          ))}
-        </DropdownMenuGroup>
+            <DropdownMenuGroup className="p-2 flex flex-col gap-5">
+              {countries?.map(({ iso_code, name }) => (
+                <div
+                  onClick={() => handleReceiveCurrency(iso_code)}
+                  key={iso_code}
+                  className="flex justify-between items-center cursor-pointer"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <img
+                      className="w-5 h-5"
+                      src={currencyFlags[iso_code]}
+                      alt=""
+                    />
+                    <h4 className="text-[14px] text-neutral-50">{iso_code}</h4>
+                    <h5>{name}</h5>
+                  </div>
+                  {selectedCurrencies.receiveCurrency === iso_code && (
+                    <div>
+                      <img src={CheckIcon} alt="" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </DropdownMenuGroup>
+          </>
+        ) : (
+          <DropdownMenuGroup className="p-2 flex flex-col gap-5">
+            {searchedCurrencies?.map(({ iso_code, name }) => (
+              <div
+                onClick={() => handleReceiveCurrency(iso_code)}
+                key={iso_code}
+                className="flex justify-between items-center cursor-pointer"
+              >
+                <div className="flex items-center gap-2.5">
+                  <img
+                    className="w-5 h-5"
+                    src={currencyFlags[iso_code]}
+                    alt=""
+                  />
+                  <h4 className="text-[14px] text-neutral-50">{iso_code}</h4>
+                  <h5>{name}</h5>
+                </div>
+                {selectedCurrencies.receiveCurrency === iso_code && (
+                  <div>
+                    <img src={CheckIcon} alt="" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </DropdownMenuGroup>
+        )}
         <DropdownMenuSeparator className="bg-neutral-400 mt-2" />
       </DropdownMenuContent>
     </DropdownMenu>

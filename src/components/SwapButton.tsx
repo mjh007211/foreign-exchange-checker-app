@@ -1,6 +1,6 @@
 export default function SwapButton() {
   return (
-    <button className="w-12 h-12 rounded-8 bg-neutral-600 flex justify-center items-center">
+    <button className="w-12 h-12 rounded-8 bg-neutral-600 flex justify-center items-center hover:bg-neutral-500 transition duration-300 cursor-pointer">
       <svg
         width="18"
         height="20"

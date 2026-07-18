@@ -7,11 +7,12 @@ import HistoryCard from "./components/HistoryCard";
 import LiveMarketsBar from "./components/LiveMarketsBar";
 import { LogButton } from "./components/LogButton";
 import NavBar from "./components/NavBar";
-import SendCheckRateCard from "./components/CheckRateCard";
+import SendCheckRateCard from "./components/CheckRateComponent";
 import SwapButton from "./components/SwapButton";
 import RenderNav from "./components/RenderNav";
 import { currencyFlags } from "./countriesFlags";
 import useCurrency from "./hooks/useCurrency";
+import CheckRateComponent from "./components/CheckRateComponent";
 
 export type CountriesData = {
   iso_code: string;
@@ -57,33 +58,7 @@ function App() {
       <div className="max-w-[1100px] px-8 mx-auto mt-12">
         <h2 className="text-[20px]">CHECK THE RATE</h2>
 
-        <div className="bg-neutral-700 mt-4  pt-5 pb-4 rounded-20">
-          <div className="px-5">
-            <div className="flex gap-6">
-              <div className="flex-1">
-                <SendCheckRateCard countries={countries} cardTitle="SEND" />
-              </div>
-              <div className="self-center">
-                <SwapButton />
-              </div>
-              <div className="flex-1">
-                <SendCheckRateCard countries={countries} cardTitle="RECEIVE" />
-              </div>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between px-5 mt-5 h-16 border-neutral-500  border-t border-dashed">
-            <div>
-              <div>
-                <h5>1 SAR = 0.8530 EUR</h5>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <FavoritedButton />
-              <LogButton />
-            </div>
-          </div>
-        </div>
+        <CheckRateComponent countries={countries} />
         <div className="mt-[42.5px]">
           <nav>
             <ul className="flex gap-2 border-b border-neutral-600">
