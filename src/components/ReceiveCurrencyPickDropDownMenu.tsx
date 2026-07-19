@@ -18,23 +18,34 @@ import CheckIcon from "../assets/icon-check.svg";
 import { currencyFlags } from "@/countriesFlags";
 import type { CountriesData } from "@/App";
 import { useState } from "react";
-import useCurrency from "@/hooks/useCurrency";
+import type { CurrenciesData } from "./CheckRateComponent";
 
 type Props = {
   countries: CountriesData[] | null;
   popularCurrencies: CountriesData[] | null;
+  selectedCurrencies: CurrenciesData;
+  setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
 };
 
 export function ReceiveCurrencyPickDropDownMenu({
   countries,
   popularCurrencies,
+  selectedCurrencies,
+  setSelectedCurrencies,
 }: Props) {
   const [searchCurrency, setSearchCurrency] = useState("");
-  const { handleReceiveCurrency, selectedCurrencies } = useCurrency();
   const [open, setOpen] = useState(false);
 
   const handleSearchCurrency = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchCurrency(event.target?.value);
+  };
+
+  const handleReceiveCurrency = (currency: string) => {
+    setSelectedCurrencies((prev) => ({
+      ...prev,
+      receiveCurrency: currency,
+    }));
+    setOpen(false);
   };
 
   const searchedCurrencies = countries?.filter((currency) =>

@@ -20,6 +20,8 @@ export default function useCurrency() {
   const [baseCurrency, setBaseCurrency] = useState<BaseCurrencyData[] | null>(
     null,
   );
+  const [rate, setRate] = useState(0);
+
   const handleSendCurrency = (currency: string) => {
     setSelectedCurrencies((prev) => ({
       ...prev,
@@ -42,8 +44,16 @@ export default function useCurrency() {
     setBaseCurrency(data);
   };
 
+  const getExchangeRate = () => {
+    const receiveCurrency = baseCurrency?.find(
+      (c) => c.quote === selectedCurrencies.receiveCurrency,
+    );
+    setRate(receiveCurrency?.rate || 0);
+  };
+
   useEffect(() => {
     getBaseCurrency();
+    getExchangeRate();
   }, [selectedCurrencies]);
 
   // const handleCurrencyConvert = async (value: number) => {
@@ -57,6 +67,7 @@ export default function useCurrency() {
   return {
     handleSendCurrency,
     handleReceiveCurrency,
+    rate,
     baseCurrency,
     selectedCurrencies,
   };

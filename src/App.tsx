@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { FavoritedButton } from "./components/FavoritedButton";
 import Header from "./components/Header";
 import HistoryCalendar from "./components/HistoryCalendar";
 import HistoryCard from "./components/HistoryCard";
 import LiveMarketsBar from "./components/LiveMarketsBar";
-import { LogButton } from "./components/LogButton";
 import NavBar from "./components/NavBar";
-import SendCheckRateCard from "./components/CheckRateComponent";
-import SwapButton from "./components/SwapButton";
 import RenderNav from "./components/RenderNav";
 import { currencyFlags } from "./countriesFlags";
-import useCurrency from "./hooks/useCurrency";
 import CheckRateComponent from "./components/CheckRateComponent";
 
 export type CountriesData = {

@@ -4,27 +4,76 @@ import SwapButton from "./SwapButton";
 import ReceiveCheckRateCard from "./ReceiveCheckRateCard";
 import { FavoritedButton } from "./FavoritedButton";
 import { LogButton } from "./LogButton";
-import useCurrency from "@/hooks/useCurrency";
 import { useEffect, useState } from "react";
+
+export type CurrenciesData = {
+  sendCurrency: string;
+  receiveCurrency: string;
+};
+
+type BaseCurrencyData = {
+  date: string;
+  base: string;
+  quote: string;
+  rate: number;
+};
 
 type Props = {
   countries: CountriesData[] | null;
 };
 
 export default function CheckRateComponent({ countries }: Props) {
-  const { selectedCurrencies } = useCurrency();
+  const [selectedCurrencies, setSelectedCurrencies] = useState<CurrenciesData>({
+    sendCurrency: "USD",
+    receiveCurrency: "EUR",
+  });
+  const [baseCurrency, setBaseCurrency] = useState<BaseCurrencyData[] | null>(
+    null,
+  );
+  const [rate, setRate] = useState(0);
+
+  const getBaseCurrency = async () => {
+    const response = await fetch(
+      `https://api.frankfurter.dev/v2/rates?base=${selectedCurrencies.sendCurrency}`,
+    );
+    const data = await response.json();
+    setBaseCurrency(data);
+  };
+
+  const getExchangeRate = () => {
+    const receiveCurrency = baseCurrency?.find(
+      (c) => c.quote === selectedCurrencies.receiveCurrency,
+    );
+    setRate(receiveCurrency?.rate || 0);
+  };
+
+  useEffect(() => {
+    getBaseCurrency();
+  }, [selectedCurrencies.sendCurrency]);
+
+  useEffect(() => {
+    getExchangeRate();
+  }, [baseCurrency, selectedCurrencies.receiveCurrency]);
 
   return (
     <div className="bg-neutral-700 mt-4 px-5  pt-5 pb-4 rounded-20">
       <div className="flex gap-6">
         <div className="flex-1">
-          <SendCheckRateCard countries={countries} />
+          <SendCheckRateCard
+            setSelectedCurrencies={setSelectedCurrencies}
+            countries={countries}
+            selectedCurrencies={selectedCurrencies}
+          />
         </div>
         <div className="self-center">
           <SwapButton />
         </div>
         <div className="flex-1">
-          <ReceiveCheckRateCard countries={countries} />
+          <ReceiveCheckRateCard
+            setSelectedCurrencies={setSelectedCurrencies}
+            countries={countries}
+            selectedCurrencies={selectedCurrencies}
+          />
         </div>
       </div>
 
@@ -32,7 +81,7 @@ export default function CheckRateComponent({ countries }: Props) {
         <div>
           <div>
             <h5>
-              1 {selectedCurrencies.sendCurrency} ={" "}
+              1 {selectedCurrencies.sendCurrency} = {rate}{" "}
               {selectedCurrencies.receiveCurrency}
             </h5>
           </div>

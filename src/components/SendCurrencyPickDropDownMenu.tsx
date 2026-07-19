@@ -19,19 +19,31 @@ import { currencyFlags } from "@/countriesFlags";
 import type { CountriesData } from "@/App";
 import { useState } from "react";
 import useCurrency from "@/hooks/useCurrency";
+import type { CurrenciesData } from "./CheckRateComponent";
 
 type Props = {
   countries: CountriesData[] | null;
   popularCurrencies: CountriesData[] | null;
+  selectedCurrencies: CurrenciesData;
+  setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
 };
 
 export function SendCurrencyPickDropDownMenu({
   countries,
   popularCurrencies,
+  setSelectedCurrencies,
+  selectedCurrencies,
 }: Props) {
   const [searchCurrency, setSearchCurrency] = useState("");
-  const { handleSendCurrency, selectedCurrencies } = useCurrency();
   const [open, setOpen] = useState(false);
+
+  const handleSendCurrency = (currency: string) => {
+    setSelectedCurrencies((prev) => ({
+      ...prev,
+      sendCurrency: currency,
+    }));
+    setOpen(false);
+  };
 
   const handleSearchCurrency = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchCurrency(event.target?.value);

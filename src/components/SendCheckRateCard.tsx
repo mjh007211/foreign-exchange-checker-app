@@ -1,12 +1,19 @@
 import type { CountriesData } from "@/App";
 import { SendCurrencyPickDropDownMenu } from "./SendCurrencyPickDropDownMenu";
 import { useRef } from "react";
+import type { CurrenciesData } from "./CheckRateComponent";
 
 type Props = {
   countries: CountriesData[] | null;
+  selectedCurrencies: CurrenciesData;
+  setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
 };
 
-export default function SendCheckRateCard({ countries }: Props) {
+export default function SendCheckRateCard({
+  countries,
+  setSelectedCurrencies,
+  selectedCurrencies,
+}: Props) {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const popularCurrencies = countries?.filter(
@@ -27,6 +34,8 @@ export default function SendCheckRateCard({ countries }: Props) {
         <SendCurrencyPickDropDownMenu
           countries={countries}
           popularCurrencies={popularCurrencies || null}
+          setSelectedCurrencies={setSelectedCurrencies}
+          selectedCurrencies={selectedCurrencies}
         />
       </div>
     </div>
