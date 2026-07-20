@@ -14,11 +14,46 @@ export type CountriesData = {
   name: string;
 };
 
+export type CurrenciesData = {
+  sendCurrency: string;
+  receiveCurrency: string;
+};
+
+export type BaseCurrencyData = {
+  date: string;
+  base: string;
+  quote: string;
+  rate: number;
+};
+
 const navigateText = ["HISTORY", "COMPARE", "FAVORITES", "LOG"];
 
 function App() {
   const [countries, setCountries] = useState<CountriesData[] | null>(null);
   const [activeNav, setActiveNav] = useState("HISTORY");
+  const [selectedCurrencies, setSelectedCurrencies] = useState<CurrenciesData>({
+    sendCurrency: "USD",
+    receiveCurrency: "EUR",
+  });
+  const [baseCurrency, setBaseCurrency] = useState<BaseCurrencyData[] | null>(
+    null,
+  );
+  const [rate, setRate] = useState(0);
+
+  const getBaseCurrency = async () => {
+    const response = await fetch(
+      `https://api.frankfurter.dev/v2/rates?base=${selectedCurrencies.sendCurrency}`,
+    );
+    const data = await response.json();
+    setBaseCurrency(data);
+  };
+
+  const getExchangeRate = () => {
+    const receiveCurrency = baseCurrency?.find(
+      (c) => c.quote === selectedCurrencies.receiveCurrency,
+    );
+    setRate(receiveCurrency?.rate || 0);
+  };
 
   const handleActiveNav = (text: string) => {
     setActiveNav(text);
@@ -43,7 +78,17 @@ function App() {
     };
 
     fetchCountries();
+    getBaseCurrency();
+    getExchangeRate();
   }, []);
+
+  useEffect(() => {
+    getBaseCurrency();
+  }, [selectedCurrencies.sendCurrency]);
+
+  useEffect(() => {
+    getExchangeRate();
+  }, [baseCurrency, selectedCurrencies.receiveCurrency]);
 
   return (
     <div>
@@ -53,7 +98,12 @@ function App() {
       <div className="max-w-[1100px] px-8 mx-auto mt-12">
         <h2 className="text-[20px]">CHECK THE RATE</h2>
 
-        <CheckRateComponent countries={countries} />
+        <CheckRateComponent
+          rate={rate}
+          selectedCurrencies={selectedCurrencies}
+          setSelectedCurrencies={setSelectedCurrencies}
+          countries={countries}
+        />
         <div className="mt-[42.5px]">
           <nav>
             <ul className="flex gap-2 border-b border-neutral-600">
