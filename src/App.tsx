@@ -35,10 +35,9 @@ function App() {
     sendCurrency: "USD",
     receiveCurrency: "EUR",
   });
-  const [baseCurrency, setBaseCurrency] = useState<BaseCurrencyData[] | null>(
-    null,
-  );
+  const [baseCurrency, setBaseCurrency] = useState<BaseCurrencyData[]>([]);
   const [rate, setRate] = useState(0);
+  const [sendAmount, setSendAmount] = useState("0");
 
   const getBaseCurrency = async () => {
     const response = await fetch(
@@ -99,6 +98,8 @@ function App() {
         <h2 className="text-[20px]">CHECK THE RATE</h2>
 
         <CheckRateComponent
+          sendAmount={sendAmount}
+          setSendAmount={setSendAmount}
           rate={rate}
           selectedCurrencies={selectedCurrencies}
           setSelectedCurrencies={setSelectedCurrencies}
@@ -128,7 +129,13 @@ function App() {
             <HistoryCalendar />
           </div>
         </div>
-        <RenderNav activeNav={activeNav} />
+        <RenderNav
+          countries={countries}
+          selectedCurrencies={selectedCurrencies}
+          sendAmount={sendAmount}
+          baseCurrency={baseCurrency}
+          activeNav={activeNav}
+        />
       </div>
     </div>
   );

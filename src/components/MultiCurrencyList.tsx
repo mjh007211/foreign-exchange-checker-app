@@ -1,21 +1,39 @@
-import KSA from "../assets/flags/sa.webp";
+import { currencyFlags } from "@/countriesFlags";
 
-export default function MultiCurrencyList() {
+type Props = {
+  sendAmount: string;
+  currencyName: string;
+  currency: string;
+  rate: number;
+};
+
+export default function MultiCurrencyList({
+  sendAmount,
+  currencyName,
+  rate,
+  currency,
+}: Props) {
+  const exchange = Number(sendAmount) * rate;
+
   return (
     <div className="flex justify-between  bg-neutral-600 rounded-10 py-3 px-3.5">
       <div className="flex items-center gap-5">
         <div>
-          <img className="w-6 h-6 bg-none" src={KSA} alt="" />{" "}
+          <img
+            className="w-6 h-6 bg-none"
+            src={currencyFlags[currency]}
+            alt=""
+          />{" "}
         </div>
         <div className="flex flex-col gap-1">
-          <h4 className="text-[14px]">SAR</h4>
-          <h3 className="text-neutral-100">Saudi Riyal</h3>
+          <h4 className="text-[14px]">{currency}</h4>
+          <h3 className="text-neutral-100">{currencyName}</h3>
         </div>
       </div>
       <div className="flex items-center gap-5">
         <div className="flex flex-col gap-1.5">
-          <span className="text-[16px]">736.64</span>
-          <span className="text-[10px] text-neutral-200">@ 0.7366</span>
+          <span className="text-[16px]">{exchange.toFixed(2)}</span>
+          <span className="text-[10px] text-neutral-200">@ {rate}</span>
         </div>
         <div>
           <svg

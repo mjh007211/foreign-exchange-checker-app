@@ -38,7 +38,7 @@ export function SendCurrencyPickDropDownMenu({
   const [open, setOpen] = useState(false);
 
   const handleSendCurrency = (currency: string) => {
-    setSelectedCurrencies((prev) => ({
+    setSelectedCurrencies((prev: CurrenciesData) => ({
       ...prev,
       sendCurrency: currency,
     }));

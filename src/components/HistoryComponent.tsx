@@ -1,3 +1,5 @@
+
+
 export default function HistoryComponent() {
   return (
     <div className="p-5 bg-neutral-700 rounded-16 mt-5">

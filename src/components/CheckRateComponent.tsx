@@ -4,12 +4,13 @@ import SwapButton from "./SwapButton";
 import ReceiveCheckRateCard from "./ReceiveCheckRateCard";
 import { FavoritedButton } from "./FavoritedButton";
 import { LogButton } from "./LogButton";
-import { useState } from "react";
 
 type Props = {
   countries: CountriesData[] | null;
   rate: number;
   selectedCurrencies: CurrenciesData;
+  sendAmount: string;
+  setSendAmount: React.Dispatch<React.SetStateAction<string>>;
   setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
 };
 
@@ -17,10 +18,10 @@ export default function CheckRateComponent({
   countries,
   rate,
   selectedCurrencies,
+  sendAmount,
+  setSendAmount,
   setSelectedCurrencies,
 }: Props) {
-  const [sendAmount, setSendAmount] = useState("0");
-
   return (
     <div className="bg-neutral-700 mt-4 px-5  pt-5 pb-4 rounded-20">
       <div className="flex gap-6">
