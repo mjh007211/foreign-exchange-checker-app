@@ -5,7 +5,7 @@ type Props = {
   baseCurrency: BaseCurrencyData[];
   sendAmount: string;
   selectedCurrencies: CurrenciesData;
-  countries: CountriesData[];
+  countries: CountriesData[] | null;
 };
 
 export default function CompareComponent({

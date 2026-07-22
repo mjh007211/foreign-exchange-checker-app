@@ -1,4 +1,9 @@
-import type { BaseCurrencyData, CountriesData, CurrenciesData } from "@/App";
+import type {
+  BaseCurrencyData,
+  CountriesData,
+  CurrenciesData,
+  FavoritedCurrencies,
+} from "@/App";
 import CompareComponent from "./CompareComponent";
 import FavoritesComponent from "./FavoritesComponent";
 import HistoryComponent from "./HistoryComponent";
@@ -9,7 +14,8 @@ type Props = {
   baseCurrency: BaseCurrencyData[];
   sendAmount: string;
   selectedCurrencies: CurrenciesData;
-  countries: CountriesData[];
+  countries: CountriesData[] | null;
+  favorited: FavoritedCurrencies[];
 };
 
 export default function RenderNav({
@@ -18,6 +24,7 @@ export default function RenderNav({
   sendAmount,
   selectedCurrencies,
   countries,
+  favorited,
 }: Props) {
   switch (activeNav) {
     case "HISTORY":
@@ -32,7 +39,9 @@ export default function RenderNav({
         />
       );
     case "FAVORITES":
-      return <FavoritesComponent />;
+      return (
+        <FavoritesComponent favorited={favorited} baseCurrency={baseCurrency} />
+      );
     case "LOG":
       return <LogComponent />;
   }

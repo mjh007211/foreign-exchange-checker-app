@@ -1,4 +1,4 @@
-import type { CountriesData, CurrenciesData } from "@/App";
+import type { CountriesData, CurrenciesData, FavoritedCurrencies } from "@/App";
 import SendCheckRateCard from "./SendCheckRateCard";
 import SwapButton from "./SwapButton";
 import ReceiveCheckRateCard from "./ReceiveCheckRateCard";
@@ -10,6 +10,7 @@ type Props = {
   rate: number;
   selectedCurrencies: CurrenciesData;
   sendAmount: string;
+  setFavorited: React.Dispatch<React.SetStateAction<FavoritedCurrencies[]>>;
   setSendAmount: React.Dispatch<React.SetStateAction<string>>;
   setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
 };
@@ -19,6 +20,7 @@ export default function CheckRateComponent({
   rate,
   selectedCurrencies,
   sendAmount,
+  setFavorited,
   setSendAmount,
   setSelectedCurrencies,
 }: Props) {
@@ -58,7 +60,10 @@ export default function CheckRateComponent({
           </div>
         </div>
         <div className="flex gap-3">
-          <FavoritedButton />
+          <FavoritedButton
+            selectedCurrencies={selectedCurrencies}
+            setFavorited={setFavorited}
+          />
           <LogButton />
         </div>
       </div>

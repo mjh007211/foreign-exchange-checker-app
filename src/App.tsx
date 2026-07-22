@@ -26,6 +26,11 @@ export type BaseCurrencyData = {
   rate: number;
 };
 
+export type FavoritedCurrencies = {
+  favoritedSend: string;
+  favoritedReceive: string;
+};
+
 const navigateText = ["HISTORY", "COMPARE", "FAVORITES", "LOG"];
 
 function App() {
@@ -38,6 +43,7 @@ function App() {
   const [baseCurrency, setBaseCurrency] = useState<BaseCurrencyData[]>([]);
   const [rate, setRate] = useState(0);
   const [sendAmount, setSendAmount] = useState("0");
+  const [favorited, setFavorited] = useState<FavoritedCurrencies[]>([]);
 
   const getBaseCurrency = async () => {
     const response = await fetch(
@@ -104,6 +110,7 @@ function App() {
           selectedCurrencies={selectedCurrencies}
           setSelectedCurrencies={setSelectedCurrencies}
           countries={countries}
+          setFavorited={setFavorited}
         />
         <div className="mt-[42.5px]">
           <nav>
@@ -130,6 +137,7 @@ function App() {
           </div>
         </div>
         <RenderNav
+          favorited={favorited}
           countries={countries}
           selectedCurrencies={selectedCurrencies}
           sendAmount={sendAmount}

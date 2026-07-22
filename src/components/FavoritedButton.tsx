@@ -1,8 +1,38 @@
+import type { CurrenciesData, FavoritedCurrencies } from "@/App";
 import { Button } from "../ui/button";
 
-export function FavoritedButton() {
+type Props = {
+  selectedCurrencies: CurrenciesData;
+  setFavorited: React.Dispatch<React.SetStateAction<FavoritedCurrencies[]>>;
+};
+
+export function FavoritedButton({ selectedCurrencies, setFavorited }: Props) {
+  const handleAddFavorited = () => {
+    setFavorited((prev) => {
+      const alreadyExists = prev.some(
+        (favorite) =>
+          favorite.favoritedSend === selectedCurrencies.sendCurrency &&
+          favorite.favoritedReceive === selectedCurrencies.receiveCurrency,
+      );
+
+      if (alreadyExists) {
+        return prev;
+      }
+
+      return [
+        ...prev,
+        {
+          favoritedSend: selectedCurrencies.sendCurrency,
+          favoritedReceive: selectedCurrencies.receiveCurrency,
+        },
+      ];
+    });
+  };
   return (
-    <Button className="flex gap-2  px-3 py-2 rounded-8! cursor-pointer font-medium bg-lime-500 text-black">
+    <Button
+      onClick={handleAddFavorited}
+      className="flex gap-2  px-3 py-2 rounded-8! cursor-pointer font-medium bg-lime-500 text-black"
+    >
       <svg
         width="16"
         height="16"
