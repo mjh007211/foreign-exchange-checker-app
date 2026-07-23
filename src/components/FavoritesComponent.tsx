@@ -1,9 +1,8 @@
-import type { BaseCurrencyData, FavoritedCurrencies } from "@/App";
+import type { FavoritedCurrencies } from "@/App";
 import FavoritesList from "./FavoritesList";
 
 type Props = {
   favorited: FavoritedCurrencies[];
-  baseCurrency: BaseCurrencyData[];
 };
 
 export default function FavoritesComponent({ favorited }: Props) {
@@ -14,7 +13,7 @@ export default function FavoritesComponent({ favorited }: Props) {
           <h3 className="text-[16px]">PINNED PAIRS</h3>
         </div>
         <div>
-          <span className="text-neutral-100">10 FAVORITES</span>
+          <span className="text-neutral-100">{favorited.length} FAVORITES</span>
         </div>
       </div>
       <div className="flex flex-col gap-3 mt-5">
@@ -26,6 +25,7 @@ export default function FavoritesComponent({ favorited }: Props) {
               <FavoritesList
                 send={f.favoritedSend}
                 receive={f.favoritedReceive}
+                rate={f.favoritedRate}
               />
             </li>
           ))

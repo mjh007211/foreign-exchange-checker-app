@@ -29,6 +29,7 @@ export type BaseCurrencyData = {
 export type FavoritedCurrencies = {
   favoritedSend: string;
   favoritedReceive: string;
+  favoritedRate: number;
 };
 
 const navigateText = ["HISTORY", "COMPARE", "FAVORITES", "LOG"];
@@ -121,7 +122,7 @@ function App() {
                   onClick={() => handleActiveNav(text)}
                   key={text}
                 >
-                  <NavBar navText={text} />
+                  <NavBar favoritedLan={favorited.length} navText={text} />
                 </li>
               ))}
             </ul>

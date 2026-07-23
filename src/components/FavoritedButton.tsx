@@ -3,10 +3,15 @@ import { Button } from "../ui/button";
 
 type Props = {
   selectedCurrencies: CurrenciesData;
+  rate: number;
   setFavorited: React.Dispatch<React.SetStateAction<FavoritedCurrencies[]>>;
 };
 
-export function FavoritedButton({ selectedCurrencies, setFavorited }: Props) {
+export function FavoritedButton({
+  selectedCurrencies,
+  rate,
+  setFavorited,
+}: Props) {
   const handleAddFavorited = () => {
     setFavorited((prev) => {
       const alreadyExists = prev.some(
@@ -24,6 +29,7 @@ export function FavoritedButton({ selectedCurrencies, setFavorited }: Props) {
         {
           favoritedSend: selectedCurrencies.sendCurrency,
           favoritedReceive: selectedCurrencies.receiveCurrency,
+          favoritedRate: rate,
         },
       ];
     });

@@ -63,6 +63,7 @@ export default function CheckRateComponent({
           <FavoritedButton
             selectedCurrencies={selectedCurrencies}
             setFavorited={setFavorited}
+            rate={rate}
           />
           <LogButton />
         </div>

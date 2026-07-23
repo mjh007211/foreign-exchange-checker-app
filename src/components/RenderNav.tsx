@@ -39,9 +39,7 @@ export default function RenderNav({
         />
       );
     case "FAVORITES":
-      return (
-        <FavoritesComponent favorited={favorited} baseCurrency={baseCurrency} />
-      );
+      return <FavoritesComponent favorited={favorited} />;
     case "LOG":
       return <LogComponent />;
   }
