@@ -32,6 +32,13 @@ export type FavoritedCurrencies = {
   favoritedRate: number;
 };
 
+export type LoggedCurrencies = {
+  loggedSend: string;
+  loggedReceive: string;
+  loggedSendAmount: string;
+  loggedReceiveAmount: number;
+};
+
 const navigateText = ["HISTORY", "COMPARE", "FAVORITES", "LOG"];
 
 function App() {
@@ -45,6 +52,8 @@ function App() {
   const [rate, setRate] = useState(0);
   const [sendAmount, setSendAmount] = useState("0");
   const [favorited, setFavorited] = useState<FavoritedCurrencies[]>([]);
+  const [receiveAmount, setReceiveAmount] = useState(0);
+  const [logged, setLogged] = useState<LoggedCurrencies[]>([]);
 
   const getBaseCurrency = async () => {
     const response = await fetch(
@@ -112,6 +121,9 @@ function App() {
           setSelectedCurrencies={setSelectedCurrencies}
           countries={countries}
           setFavorited={setFavorited}
+          receiveAmount={receiveAmount}
+          setReceiveAmount={setReceiveAmount}
+          setLogged={setLogged}
         />
         <div className="mt-[42.5px]">
           <nav>
@@ -122,7 +134,11 @@ function App() {
                   onClick={() => handleActiveNav(text)}
                   key={text}
                 >
-                  <NavBar favoritedLan={favorited.length} navText={text} />
+                  <NavBar
+                    favoritedLan={favorited.length}
+                    loggedLan={logged.length}
+                    navText={text}
+                  />
                 </li>
               ))}
             </ul>
@@ -144,6 +160,9 @@ function App() {
           sendAmount={sendAmount}
           baseCurrency={baseCurrency}
           activeNav={activeNav}
+          receiveAmount={receiveAmount}
+          logged={logged}
+          setLogged={setLogged}
         />
       </div>
     </div>

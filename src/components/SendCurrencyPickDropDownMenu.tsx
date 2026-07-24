@@ -120,10 +120,6 @@ export function SendCurrencyPickDropDownMenu({
         <DropdownMenuSeparator className="bg-neutral-400" />
         {!searchCurrency ? (
           <>
-            <div className="flex p-2 justify-between items-center mt-2.5">
-              <h4>POPULAR</h4>
-              <span>{popularCurrencies?.length}</span>
-            </div>
             <DropdownMenuGroup className="p-2 flex flex-col gap-5">
               {popularCurrencies?.map(({ iso_code, name }) => (
                 <div

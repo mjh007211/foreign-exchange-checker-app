@@ -1,4 +1,9 @@
-import type { CountriesData, CurrenciesData, FavoritedCurrencies } from "@/App";
+import type {
+  CountriesData,
+  CurrenciesData,
+  FavoritedCurrencies,
+  LoggedCurrencies,
+} from "@/App";
 import SendCheckRateCard from "./SendCheckRateCard";
 import SwapButton from "./SwapButton";
 import ReceiveCheckRateCard from "./ReceiveCheckRateCard";
@@ -10,9 +15,12 @@ type Props = {
   rate: number;
   selectedCurrencies: CurrenciesData;
   sendAmount: string;
+  receiveAmount: number;
+  setReceiveAmount: React.Dispatch<React.SetStateAction<number>>;
   setFavorited: React.Dispatch<React.SetStateAction<FavoritedCurrencies[]>>;
   setSendAmount: React.Dispatch<React.SetStateAction<string>>;
   setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
+  setLogged: React.Dispatch<React.SetStateAction<LoggedCurrencies[]>>;
 };
 
 export default function CheckRateComponent({
@@ -20,9 +28,12 @@ export default function CheckRateComponent({
   rate,
   selectedCurrencies,
   sendAmount,
+  receiveAmount,
+  setReceiveAmount,
   setFavorited,
   setSendAmount,
   setSelectedCurrencies,
+  setLogged,
 }: Props) {
   return (
     <div className="bg-neutral-700 mt-4 px-5  pt-5 pb-4 rounded-20">
@@ -46,6 +57,8 @@ export default function CheckRateComponent({
             setSelectedCurrencies={setSelectedCurrencies}
             countries={countries}
             selectedCurrencies={selectedCurrencies}
+            receiveAmount={receiveAmount}
+            setReceiveAmount={setReceiveAmount}
           />
         </div>
       </div>
@@ -65,7 +78,12 @@ export default function CheckRateComponent({
             setFavorited={setFavorited}
             rate={rate}
           />
-          <LogButton />
+          <LogButton
+            receiveAmount={receiveAmount}
+            sendAmount={sendAmount}
+            selectedCurrencies={selectedCurrencies}
+            setLogged={setLogged}
+          />
         </div>
       </div>
     </div>

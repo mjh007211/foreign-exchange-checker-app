@@ -7,6 +7,8 @@ type Props = {
   selectedCurrencies: CountriesData;
   rate: number;
   sendAmount: string;
+  receiveAmount: number;
+  setReceiveAmount: React.Dispatch<React.SetStateAction<number>>;
   setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
 };
 
@@ -14,10 +16,11 @@ export default function ReceiveCheckRateCard({
   countries,
   sendAmount,
   rate,
+  receiveAmount,
+  setReceiveAmount,
   setSelectedCurrencies,
   selectedCurrencies,
 }: Props) {
-  const [receiveAmount, setReceiveAmount] = useState(0);
   const popularCurrencies = countries?.filter(
     ({ iso_code }) =>
       iso_code === "USD" || iso_code === "EUR" || iso_code === "GBP",

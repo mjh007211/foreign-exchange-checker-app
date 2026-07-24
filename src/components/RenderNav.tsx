@@ -3,6 +3,7 @@ import type {
   CountriesData,
   CurrenciesData,
   FavoritedCurrencies,
+  LoggedCurrencies,
 } from "@/App";
 import CompareComponent from "./CompareComponent";
 import FavoritesComponent from "./FavoritesComponent";
@@ -16,15 +17,20 @@ type Props = {
   selectedCurrencies: CurrenciesData;
   countries: CountriesData[] | null;
   favorited: FavoritedCurrencies[];
+  receiveAmount: number;
+  logged: LoggedCurrencies[];
+  setLogged: React.Dispatch<React.SetStateAction<LoggedCurrencies[]>>;
 };
 
 export default function RenderNav({
+  logged,
   activeNav,
   baseCurrency,
   sendAmount,
   selectedCurrencies,
   countries,
   favorited,
+  setLogged,
 }: Props) {
   switch (activeNav) {
     case "HISTORY":
@@ -41,6 +47,6 @@ export default function RenderNav({
     case "FAVORITES":
       return <FavoritesComponent favorited={favorited} />;
     case "LOG":
-      return <LogComponent />;
+      return <LogComponent setLogged={setLogged} logged={logged} />;
   }
 }

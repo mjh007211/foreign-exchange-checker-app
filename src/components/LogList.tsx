@@ -1,4 +1,16 @@
-export default function LogList() {
+type Props = {
+  loggedSend: string;
+  loggedReceive: string;
+  loggedSendAmount: string;
+  loggedReceiveAmount: number;
+};
+
+export default function LogList({
+  loggedSend,
+  loggedReceive,
+  loggedSendAmount,
+  loggedReceiveAmount,
+}: Props) {
   return (
     <div className="flex justify-between  bg-neutral-600 rounded-10 py-3 px-3.5">
       <div className="flex items-center gap-10">
@@ -6,7 +18,7 @@ export default function LogList() {
           <span className="text-[14px] text-neutral-200">20M</span>
         </div>
         <div className="flex items-center gap-2">
-          <h4 className="text-neutral-100 text-[14px]">SAR</h4>
+          <h4 className="text-neutral-100 text-[14px]">{loggedSend}</h4>
           <svg
             width="11"
             height="11"
@@ -19,16 +31,18 @@ export default function LogList() {
               fill="#9D9D9D"
             />
           </svg>
-          <h4 className="text-neutral-100 text-[14px]">EGY</h4>
+          <h4 className="text-neutral-100 text-[14px]">{loggedReceive}</h4>
         </div>
       </div>
 
       <div className="flex items-center gap-5">
         <div>
-          <span>1,000.00</span>
+          <span>{loggedSendAmount}</span>
         </div>
         <div>
-          <span className="text-lime-500">853.02</span>
+          <span className="text-lime-500">
+            {loggedReceiveAmount.toFixed(2)}
+          </span>
         </div>
         <div>
           <svg
