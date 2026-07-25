@@ -16,10 +16,8 @@ import {
 import SearcgIcon from "../assets/icon-search.svg";
 import CheckIcon from "../assets/icon-check.svg";
 import { currencyFlags } from "@/countriesFlags";
-import type { CountriesData } from "@/App";
 import { useState } from "react";
-import useCurrency from "@/hooks/useCurrency";
-import type { CurrenciesData } from "./CheckRateComponent";
+import type { CountriesData, CurrenciesData } from "@/type";
 
 type Props = {
   countries: CountriesData[] | null;

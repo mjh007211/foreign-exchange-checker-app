@@ -1,5 +1,5 @@
+import type { BaseCurrencyData, CurrenciesData, CountriesData } from "@/type";
 import MultiCurrencyList from "./MultiCurrencyList";
-import type { BaseCurrencyData, CountriesData, CurrenciesData } from "@/App";
 
 type Props = {
   baseCurrency: BaseCurrencyData[];

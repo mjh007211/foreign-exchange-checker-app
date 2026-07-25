@@ -1,14 +1,14 @@
-import type {
-  CountriesData,
-  CurrenciesData,
-  FavoritedCurrencies,
-  LoggedCurrencies,
-} from "@/App";
 import SendCheckRateCard from "./SendCheckRateCard";
 import SwapButton from "./SwapButton";
 import ReceiveCheckRateCard from "./ReceiveCheckRateCard";
 import { FavoritedButton } from "./FavoritedButton";
 import { LogButton } from "./LogButton";
+import type {
+  CountriesData,
+  CurrenciesData,
+  FavoritedCurrencies,
+  LoggedCurrencies,
+} from "@/type";
 
 type Props = {
   countries: CountriesData[] | null;

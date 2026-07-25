@@ -1,4 +1,4 @@
-import type { LoggedCurrencies } from "@/App";
+import type { LoggedCurrencies } from "@/type";
 import ClearButton from "./ClearButton";
 import LogList from "./LogList";
 

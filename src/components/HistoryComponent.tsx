@@ -1,10 +1,8 @@
-
-
 export default function HistoryComponent() {
   return (
     <div className="p-5 bg-neutral-700 rounded-16 mt-5">
       <div className="flex justify-between">
-        <h3 className="text-[16px]">SAR/EUR</h3>
+        <h3 className="text-preset-3">SAR/EUR</h3>
         <div className="text-neutral-200">0.8530 . MAY 14 16:00 CET</div>
       </div>
       <svg

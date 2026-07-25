@@ -8,7 +8,7 @@ export default function FavoritesList({ send, receive, rate }: Props) {
   return (
     <div className="flex justify-between  bg-neutral-600 rounded-10 py-3 px-3.5">
       <div className="flex items-center gap-2">
-        <h4 className="text-neutral-100 text-[14px]">{send}</h4>
+        <h4 className="text-neutral-100 text-preset-4">{send}</h4>
         <svg
           width="11"
           height="11"
@@ -25,8 +25,8 @@ export default function FavoritesList({ send, receive, rate }: Props) {
       </div>
       <div className="flex items-center gap-5">
         <div className="flex flex-col gap-1.5">
-          <span className="text-[16px]">{rate}</span>
-          <span className="text-[10px] text-green-500">+0.16%</span>
+          <span className="text-preset-3">{rate}</span>
+          <span className="text-preset-3 text-green-500">+0.16%</span>
         </div>
         <div>
           <svg

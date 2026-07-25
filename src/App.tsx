@@ -8,36 +8,13 @@ import NavBar from "./components/NavBar";
 import RenderNav from "./components/RenderNav";
 import { currencyFlags } from "./countriesFlags";
 import CheckRateComponent from "./components/CheckRateComponent";
-
-export type CountriesData = {
-  iso_code: string;
-  name: string;
-};
-
-export type CurrenciesData = {
-  sendCurrency: string;
-  receiveCurrency: string;
-};
-
-export type BaseCurrencyData = {
-  date: string;
-  base: string;
-  quote: string;
-  rate: number;
-};
-
-export type FavoritedCurrencies = {
-  favoritedSend: string;
-  favoritedReceive: string;
-  favoritedRate: number;
-};
-
-export type LoggedCurrencies = {
-  loggedSend: string;
-  loggedReceive: string;
-  loggedSendAmount: string;
-  loggedReceiveAmount: number;
-};
+import type {
+  CountriesData,
+  CurrenciesData,
+  BaseCurrencyData,
+  FavoritedCurrencies,
+  LoggedCurrencies,
+} from "./type";
 
 const navigateText = ["HISTORY", "COMPARE", "FAVORITES", "LOG"];
 
@@ -110,8 +87,8 @@ function App() {
       <Header />
       <LiveMarketsBar />
 
-      <div className="max-w-[1100px] px-8 mx-auto mt-12">
-        <h2 className="text-[20px]">CHECK THE RATE</h2>
+      <div className="max-w-275 px-8 mx-auto mt-12">
+        <h2 className="text-preset-2">CHECK THE RATE</h2>
 
         <CheckRateComponent
           sendAmount={sendAmount}
@@ -144,7 +121,7 @@ function App() {
             </ul>
           </nav>
           <div className="flex justify-between items-center mt-5">
-            <div className="flex gap-4">
+            <div className="flex gap-4 ">
               <HistoryCard title="OPEN" percentChange="0.8516" />
               <HistoryCard title="LAST" percentChange="0.8530" />
               <HistoryCard title="CHANGE" percentChange="+0.0014" />

@@ -1,6 +1,6 @@
 export default function HistoryCalendar() {
   return (
-    <div className="flex w-[286px] h-[42px] bg-neutral-700">
+    <div className="flex w-71.5 h-10.5 bg-neutral-700">
       <div className="flex-1">
         <div className="flex justify-center items-center cursor-pointer text-neutral-200 rounded-8 hover:bg-neutral-500 px-4 py-3">
           1D

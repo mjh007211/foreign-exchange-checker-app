@@ -1,4 +1,4 @@
-import type { CurrenciesData, FavoritedCurrencies } from "@/App";
+import type { CurrenciesData, FavoritedCurrencies } from "@/type";
 import { Button } from "../ui/button";
 
 type Props = {

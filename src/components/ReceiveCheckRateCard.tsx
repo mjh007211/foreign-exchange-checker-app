@@ -1,10 +1,10 @@
-import type { CountriesData, CurrenciesData } from "@/App";
+import type { CountriesData, CurrenciesData } from "@/type";
 import { ReceiveCurrencyPickDropDownMenu } from "./ReceiveCurrencyPickDropDownMenu";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 type Props = {
   countries: CountriesData[] | null;
-  selectedCurrencies: CountriesData;
+  selectedCurrencies: CurrenciesData;
   rate: number;
   sendAmount: string;
   receiveAmount: number;
@@ -38,10 +38,10 @@ export default function ReceiveCheckRateCard({
 
   return (
     <div className="bg-neutral-600 flex flex-col gap-5 rounded-2xl p-5">
-      <h4 className="text-neutral-100 text-[14px]">RECEIVE</h4>
+      <h4 className="text-neutral-100 text-preset-4">RECEIVE</h4>
       <div className="flex justify-between items-center">
         <span
-          className={`text-[40px] font-bold w-fit max-w-[142px] overflow-hidden  h-12 rounded-8 text-lime-500`}
+          className={`text-preset-1 font-bold w-fit max-w-35.5 overflow-hidden  h-12 rounded-8 text-lime-500`}
         >
           {!receiveAmount ? receiveAmount : receiveAmount.toFixed(2)}
         </span>

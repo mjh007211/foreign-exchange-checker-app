@@ -2,10 +2,10 @@ import Logo from "../assets/logo.svg";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center  px-300 h-[66px]">
+    <header className="flex justify-between items-center  px-300 h-16.5">
       <img src={Logo} alt="" />
 
-      <div className="flex gap-3.5 text-[14px] text-neutral-200">
+      <div className="flex gap-3.5 text-preset-4 text-neutral-200">
         <div className="flex gap-3.5">
           <span>55</span>
           <h4>CURRENCIES</h4>

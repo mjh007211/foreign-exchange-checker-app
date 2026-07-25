@@ -1,4 +1,4 @@
-import type { FavoritedCurrencies } from "@/App";
+import type { FavoritedCurrencies } from "@/type";
 import FavoritesList from "./FavoritesList";
 
 type Props = {

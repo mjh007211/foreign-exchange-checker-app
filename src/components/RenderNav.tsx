@@ -1,10 +1,10 @@
 import type {
   BaseCurrencyData,
-  CountriesData,
   CurrenciesData,
+  CountriesData,
   FavoritedCurrencies,
   LoggedCurrencies,
-} from "@/App";
+} from "@/type";
 import CompareComponent from "./CompareComponent";
 import FavoritesComponent from "./FavoritesComponent";
 import HistoryComponent from "./HistoryComponent";

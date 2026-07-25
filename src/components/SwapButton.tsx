@@ -1,4 +1,4 @@
-import type { CurrenciesData } from "@/App";
+import type { CurrenciesData } from "@/type";
 
 type Props = {
   setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;

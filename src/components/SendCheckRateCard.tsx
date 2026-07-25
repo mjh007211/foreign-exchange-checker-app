@@ -1,4 +1,4 @@
-import type { CountriesData, CurrenciesData } from "@/App";
+import type { CountriesData, CurrenciesData } from "@/type";
 import { SendCurrencyPickDropDownMenu } from "./SendCurrencyPickDropDownMenu";
 
 type Props = {
