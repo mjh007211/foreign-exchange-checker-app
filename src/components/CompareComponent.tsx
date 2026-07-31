@@ -1,4 +1,9 @@
-import type { BaseCurrencyData, CurrenciesData, CountriesData } from "@/type";
+import type {
+  BaseCurrencyData,
+  CurrenciesData,
+  CountriesData,
+  FavoritedCurrencies,
+} from "@/type";
 import MultiCurrencyList from "./MultiCurrencyList";
 
 type Props = {
@@ -6,6 +11,7 @@ type Props = {
   sendAmount: string;
   selectedCurrencies: CurrenciesData;
   countries: CountriesData[] | null;
+  favorited: FavoritedCurrencies[];
 };
 
 export default function CompareComponent({
@@ -13,6 +19,7 @@ export default function CompareComponent({
   sendAmount,
   selectedCurrencies,
   countries,
+  favorited,
 }: Props) {
   const ratesByQuote = Object.fromEntries(
     baseCurrency.map((c) => [c.quote, c]),
@@ -28,7 +35,9 @@ export default function CompareComponent({
           </span>
         </div>
         <div>
-          <span className="text-neutral-100">8 PAIRS</span>
+          <span className="text-neutral-100">
+            {countries ? countries?.length - 2 : 0} PAIRS
+          </span>
         </div>
       </div>
       <div className="flex flex-col gap-3 mt-5">
@@ -47,6 +56,7 @@ export default function CompareComponent({
                 currencyName={c.name}
                 rate={ratesByQuote[c.iso_code]?.rate}
                 sendAmount={sendAmount}
+                favorited={favorited}
               />
             </li>
           );

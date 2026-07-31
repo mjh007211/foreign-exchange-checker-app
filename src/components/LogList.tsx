@@ -1,16 +1,31 @@
+import type { LoggedCurrencies } from "@/type";
+
 type Props = {
+  id: string;
   loggedSend: string;
   loggedReceive: string;
   loggedSendAmount: string;
   loggedReceiveAmount: number;
+  logged: LoggedCurrencies[];
+  setLogged: React.Dispatch<React.SetStateAction<LoggedCurrencies[]>>;
 };
 
 export default function LogList({
+  id,
   loggedSend,
   loggedReceive,
   loggedSendAmount,
   loggedReceiveAmount,
+  logged,
+  setLogged,
 }: Props) {
+  const handleDeleteLog = (id: string) => {
+    const isDeleted = confirm("Are you sure you want to delete this Log?");
+    if (!isDeleted) return;
+    const filitedLog = logged.filter((log) => log.id != id);
+    setLogged(filitedLog);
+  };
+
   return (
     <div className="flex justify-between  bg-neutral-600 rounded-10 py-3 px-3.5">
       <div className="flex items-center gap-10">
@@ -37,7 +52,7 @@ export default function LogList({
 
       <div className="flex items-center gap-5">
         <div>
-          <span>{loggedSendAmount}</span>
+          <span>{`${loggedSendAmount}.00`}</span>
         </div>
         <div>
           <span className="text-lime-500">
@@ -45,26 +60,31 @@ export default function LogList({
           </span>
         </div>
         <div>
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <button
+            onClick={() => handleDeleteLog(id)}
+            className="cursor-pointer"
           >
-            <path
-              d="M8 0.5H24C28.1421 0.5 31.5 3.85786 31.5 8V24C31.5 28.1421 28.1421 31.5 24 31.5H8C3.85786 31.5 0.5 28.1421 0.5 24V8C0.5 3.85786 3.85786 0.5 8 0.5Z"
-              fill="#202022"
-            />
-            <path
-              d="M8 0.5H24C28.1421 0.5 31.5 3.85786 31.5 8V24C31.5 28.1421 28.1421 31.5 24 31.5H8C3.85786 31.5 0.5 28.1421 0.5 24V8C0.5 3.85786 3.85786 0.5 8 0.5Z"
-              stroke="#2E2E2E"
-            />
-            <path
-              d="M20.875 11.875C21.0625 11.875 21.25 12.0625 21.25 12.25V12.625C21.25 12.8359 21.0625 13 20.875 13H20.5L19.9844 20.9453C19.9609 21.5312 19.4453 22 18.8594 22H13.1172C12.5313 22 12.0156 21.5312 11.9922 20.9453L11.5 13H11.125C10.9141 13 10.75 12.8359 10.75 12.625V12.25C10.75 12.0625 10.9141 11.875 11.125 11.875H13.0469L13.8438 10.5625C14.0313 10.2578 14.4531 10 14.8047 10H17.1719C17.5234 10 17.9453 10.2578 18.1328 10.5625L18.9297 11.875H20.875ZM14.8047 11.125L14.3594 11.875H17.6172L17.1719 11.125H14.8047ZM18.8594 20.875L19.3516 13H12.625L13.1172 20.875H18.8594Z"
-              fill="white"
-            />
-          </svg>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 0.5H24C28.1421 0.5 31.5 3.85786 31.5 8V24C31.5 28.1421 28.1421 31.5 24 31.5H8C3.85786 31.5 0.5 28.1421 0.5 24V8C0.5 3.85786 3.85786 0.5 8 0.5Z"
+                fill="#202022"
+              />
+              <path
+                d="M8 0.5H24C28.1421 0.5 31.5 3.85786 31.5 8V24C31.5 28.1421 28.1421 31.5 24 31.5H8C3.85786 31.5 0.5 28.1421 0.5 24V8C0.5 3.85786 3.85786 0.5 8 0.5Z"
+                stroke="#2E2E2E"
+              />
+              <path
+                d="M20.875 11.875C21.0625 11.875 21.25 12.0625 21.25 12.25V12.625C21.25 12.8359 21.0625 13 20.875 13H20.5L19.9844 20.9453C19.9609 21.5312 19.4453 22 18.8594 22H13.1172C12.5313 22 12.0156 21.5312 11.9922 20.9453L11.5 13H11.125C10.9141 13 10.75 12.8359 10.75 12.625V12.25C10.75 12.0625 10.9141 11.875 11.125 11.875H13.0469L13.8438 10.5625C14.0313 10.2578 14.4531 10 14.8047 10H17.1719C17.5234 10 17.9453 10.2578 18.1328 10.5625L18.9297 11.875H20.875ZM14.8047 11.125L14.3594 11.875H17.6172L17.1719 11.125H14.8047ZM18.8594 20.875L19.3516 13H12.625L13.1172 20.875H18.8594Z"
+                fill="white"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </div>

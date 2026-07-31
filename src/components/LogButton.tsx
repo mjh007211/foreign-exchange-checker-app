@@ -31,6 +31,7 @@ export function LogButton({
       return [
         ...prev,
         {
+          id: crypto.randomUUID(),
           loggedSend: selectedCurrencies.sendCurrency,
           loggedReceive: selectedCurrencies.receiveCurrency,
           loggedSendAmount: sendAmount,

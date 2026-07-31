@@ -38,6 +38,7 @@ export default function RenderNav({
     case "COMPARE":
       return (
         <CompareComponent
+          favorited={favorited}
           countries={countries}
           selectedCurrencies={selectedCurrencies}
           sendAmount={sendAmount}

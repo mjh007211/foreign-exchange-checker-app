@@ -22,6 +22,7 @@ export type FavoritedCurrencies = {
 };
 
 export type LoggedCurrencies = {
+  id: string;
   loggedSend: string;
   loggedReceive: string;
   loggedSendAmount: string;

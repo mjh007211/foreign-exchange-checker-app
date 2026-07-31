@@ -25,17 +25,21 @@ export default function LogComponent({ logged, setLogged }: Props) {
         ) : (
           logged.map(
             ({
+              id,
               loggedSend,
               loggedReceive,
               loggedSendAmount,
               loggedReceiveAmount,
             }) => (
-              <li key={loggedSend}>
+              <li key={id}>
                 <LogList
+                  id={id}
                   loggedSend={loggedSend}
                   loggedReceive={loggedReceive}
                   loggedSendAmount={loggedSendAmount}
                   loggedReceiveAmount={loggedReceiveAmount}
+                  logged={logged}
+                  setLogged={setLogged}
                 />
               </li>
             ),
