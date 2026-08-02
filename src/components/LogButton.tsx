@@ -1,5 +1,6 @@
 import type { CurrenciesData, LoggedCurrencies } from "@/type";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 type Props = {
   receiveAmount: number;
@@ -16,7 +17,10 @@ export function LogButton({
 }: Props) {
   const handleAddLogged = () => {
     setLogged((prev) => {
-      if (sendAmount === "0" && receiveAmount === 0) return prev;
+      if (sendAmount === "0" && receiveAmount === 0) {
+        toast.error("enter a send amount.");
+        return prev;
+      }
 
       const alreadyExists = prev.some(
         (log) =>
@@ -25,8 +29,11 @@ export function LogButton({
       );
 
       if (alreadyExists) {
+        toast.error("you already have logged the same data before.");
         return prev;
       }
+
+      toast.success("it's has been successfully added to log!");
 
       return [
         ...prev,

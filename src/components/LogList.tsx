@@ -1,4 +1,5 @@
 import type { LoggedCurrencies } from "@/type";
+import { toast } from "sonner";
 
 type Props = {
   id: string;
@@ -24,6 +25,7 @@ export default function LogList({
     if (!isDeleted) return;
     const filitedLog = logged.filter((log) => log.id != id);
     setLogged(filitedLog);
+    toast.success("the conversion log has been deleted successfully!");
   };
 
   return (

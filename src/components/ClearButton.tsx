@@ -1,5 +1,6 @@
 import type { LoggedCurrencies } from "@/type";
 import { Button } from "@/ui/button";
+import { toast } from "sonner";
 
 type Props = {
   setLogged: React.Dispatch<React.SetStateAction<LoggedCurrencies[]>>;
@@ -10,6 +11,7 @@ export default function ClearButton({ setLogged }: Props) {
     const isClear = confirm("Are you sure you want to delete all Logged?");
     if (!isClear) return;
     setLogged([]);
+    toast.success("the conversion logs have been cleared successfully!");
   };
   return (
     <Button

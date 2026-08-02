@@ -1,5 +1,6 @@
 import type { CurrenciesData, FavoritedCurrencies } from "@/type";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 type Props = {
   selectedCurrencies: CurrenciesData;
@@ -21,8 +22,11 @@ export function FavoritedButton({
       );
 
       if (alreadyExists) {
+        toast.error("it's already existed in favorited.");
         return prev;
       }
+
+      toast.success("it's has been successfully added to favorited!");
 
       return [
         ...prev,
