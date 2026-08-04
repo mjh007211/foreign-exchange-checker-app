@@ -33,18 +33,39 @@ function App() {
   const [logged, setLogged] = useState<LoggedCurrencies[]>([]);
 
   const getBaseCurrency = async () => {
-    const response = await fetch(
-      `https://api.frankfurter.dev/v2/rates?base=${selectedCurrencies.sendCurrency}`,
-    );
-    const data = await response.json();
-    setBaseCurrency(data);
+    try {
+      const response = await fetch(
+        `https://api.frankfurter.dev/v2/rates?base=${selectedCurrencies.sendCurrency}`,
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch exchange rates");
+      }
+
+      const data = await response.json();
+      setBaseCurrency(data);
+    } catch (error) {
+      console.error(error);
+      setBaseCurrency([]);
+    }
   };
 
   const getExchangeRate = () => {
-    const receiveCurrency = baseCurrency?.find(
+    if (!baseCurrency) {
+      setRate(0);
+      return;
+    }
+
+    const receiveCurrency = baseCurrency.find(
       (c) => c.quote === selectedCurrencies.receiveCurrency,
     );
-    setRate(receiveCurrency?.rate || 0);
+
+    if (!receiveCurrency) {
+      setRate(0);
+      return;
+    }
+
+    setRate(receiveCurrency.rate);
   };
 
   const handleActiveNav = (text: string) => {
@@ -53,20 +74,31 @@ function App() {
 
   useEffect(() => {
     const fetchCountries = async () => {
-      const response = await fetch("https://api.frankfurter.dev/v2/currencies");
-      const data = await response.json();
-      const countriesData: CountriesData[] = data.map(
-        ({ iso_code, name }: CountriesData) => ({
+      try {
+        const response = await fetch(
+          "https://api.frankfurter.dev/v2/currencies",
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch currencies");
+        }
+
+        const data = await response.json();
+
+        const countriesData = data.map(({ iso_code, name }: CountriesData) => ({
           iso_code,
           name,
-        }),
-      );
+        }));
 
-      const countriesWithFlags = countriesData.filter(
-        ({ iso_code }) => currencyFlags[iso_code],
-      );
+        const countriesWithFlags = countriesData.filter(
+          ({ iso_code }: CountriesData) => currencyFlags[iso_code],
+        );
 
-      setCountries(countriesWithFlags);
+        setCountries(countriesWithFlags);
+      } catch (error) {
+        console.error(error);
+        setCountries([]);
+      }
     };
 
     fetchCountries();

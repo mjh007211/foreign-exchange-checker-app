@@ -45,6 +45,7 @@ export function ReceiveCurrencyPickDropDownMenu({
       receiveCurrency: currency,
     }));
     setOpen(false);
+    setSearchCurrency("");
   };
 
   const searchedCurrencies = countries?.filter((currency) =>

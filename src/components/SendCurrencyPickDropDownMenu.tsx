@@ -41,6 +41,7 @@ export function SendCurrencyPickDropDownMenu({
       sendCurrency: currency,
     }));
     setOpen(false);
+    setSearchCurrency("");
   };
 
   const handleSearchCurrency = (event: React.ChangeEvent<HTMLInputElement>) => {
