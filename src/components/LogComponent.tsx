@@ -1,13 +1,11 @@
-import type { LoggedCurrencies } from "@/type";
 import ClearButton from "./ClearButton";
 import LogList from "./LogList";
+import { CurrencyContext } from "@/context/CurrencyContext";
+import { useContext } from "react";
 
-type Props = {
-  logged: LoggedCurrencies[];
-  setLogged: React.Dispatch<React.SetStateAction<LoggedCurrencies[]>>;
-};
+export default function LogComponent() {
+  const { logged, setLogged } = useContext(CurrencyContext);
 
-export default function LogComponent({ logged, setLogged }: Props) {
   return (
     <div className="bg-neutral-700 p-5 rounded-16 mt-5">
       <div className="flex justify-between">
@@ -16,7 +14,7 @@ export default function LogComponent({ logged, setLogged }: Props) {
         </div>
         <div className="flex items-center gap-4">
           <span className="text-neutral-100">{logged.length} LOGGED</span>
-          <ClearButton setLogged={setLogged} />
+          <ClearButton />
         </div>
       </div>
       <div className="flex flex-col gap-3 mt-5">
@@ -38,8 +36,6 @@ export default function LogComponent({ logged, setLogged }: Props) {
                   loggedReceive={loggedReceive}
                   loggedSendAmount={loggedSendAmount}
                   loggedReceiveAmount={loggedReceiveAmount}
-                  logged={logged}
-                  setLogged={setLogged}
                 />
               </li>
             ),

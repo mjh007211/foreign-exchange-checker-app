@@ -1,20 +1,12 @@
-import type { CurrenciesData, LoggedCurrencies } from "@/type";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
+import { CurrencyContext } from "@/context/CurrencyContext";
+import { useContext } from "react";
 
-type Props = {
-  receiveAmount: number;
-  sendAmount: string;
-  selectedCurrencies: CurrenciesData;
-  setLogged: React.Dispatch<React.SetStateAction<LoggedCurrencies[]>>;
-};
+export function LogButton() {
+  const { receiveAmount, sendAmount, selectedCurrencies, setLogged } =
+    useContext(CurrencyContext);
 
-export function LogButton({
-  receiveAmount,
-  sendAmount,
-  selectedCurrencies,
-  setLogged,
-}: Props) {
   const handleAddLogged = () => {
     setLogged((prev) => {
       if (sendAmount === "0" && receiveAmount === 0) {

@@ -3,63 +3,23 @@ import SwapButton from "./SwapButton";
 import ReceiveCheckRateCard from "./ReceiveCheckRateCard";
 import { FavoritedButton } from "./FavoritedButton";
 import { LogButton } from "./LogButton";
-import type {
-  CountriesData,
-  CurrenciesData,
-  FavoritedCurrencies,
-  LoggedCurrencies,
-} from "@/type";
+import { useContext } from "react";
+import { CurrencyContext } from "@/context/CurrencyContext";
 
-type Props = {
-  countries: CountriesData[] | null;
-  rate: number;
-  selectedCurrencies: CurrenciesData;
-  sendAmount: string;
-  receiveAmount: number;
-  setReceiveAmount: React.Dispatch<React.SetStateAction<number>>;
-  setFavorited: React.Dispatch<React.SetStateAction<FavoritedCurrencies[]>>;
-  setSendAmount: React.Dispatch<React.SetStateAction<string>>;
-  setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
-  setLogged: React.Dispatch<React.SetStateAction<LoggedCurrencies[]>>;
-};
+export default function CheckRateComponent() {
+  const { rate, selectedCurrencies } = useContext(CurrencyContext);
 
-export default function CheckRateComponent({
-  countries,
-  rate,
-  selectedCurrencies,
-  sendAmount,
-  receiveAmount,
-  setReceiveAmount,
-  setFavorited,
-  setSendAmount,
-  setSelectedCurrencies,
-  setLogged,
-}: Props) {
   return (
     <div className="bg-neutral-700 mt-4 px-5  pt-5 pb-4 rounded-20">
       <div className="flex gap-6">
         <div className="flex-1">
-          <SendCheckRateCard
-            sendAmount={sendAmount}
-            setSendAmount={setSendAmount}
-            setSelectedCurrencies={setSelectedCurrencies}
-            countries={countries}
-            selectedCurrencies={selectedCurrencies}
-          />
+          <SendCheckRateCard />
         </div>
         <div className="self-center">
-          <SwapButton setSelectedCurrencies={setSelectedCurrencies} />
+          <SwapButton />
         </div>
         <div className="flex-1">
-          <ReceiveCheckRateCard
-            sendAmount={sendAmount}
-            rate={rate}
-            setSelectedCurrencies={setSelectedCurrencies}
-            countries={countries}
-            selectedCurrencies={selectedCurrencies}
-            receiveAmount={receiveAmount}
-            setReceiveAmount={setReceiveAmount}
-          />
+          <ReceiveCheckRateCard />
         </div>
       </div>
 
@@ -73,17 +33,8 @@ export default function CheckRateComponent({
           </div>
         </div>
         <div className="flex gap-3">
-          <FavoritedButton
-            selectedCurrencies={selectedCurrencies}
-            setFavorited={setFavorited}
-            rate={rate}
-          />
-          <LogButton
-            receiveAmount={receiveAmount}
-            sendAmount={sendAmount}
-            selectedCurrencies={selectedCurrencies}
-            setLogged={setLogged}
-          />
+          <FavoritedButton />
+          <LogButton />
         </div>
       </div>
     </div>

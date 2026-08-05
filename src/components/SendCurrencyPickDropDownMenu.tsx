@@ -3,37 +3,26 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import SearcgIcon from "../assets/icon-search.svg";
 import CheckIcon from "../assets/icon-check.svg";
 import { currencyFlags } from "@/countriesFlags";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import type { CountriesData, CurrenciesData } from "@/type";
+import { CurrencyContext } from "@/context/CurrencyContext";
 
 type Props = {
-  countries: CountriesData[] | null;
   popularCurrencies: CountriesData[] | null;
-  selectedCurrencies: CurrenciesData;
-  setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
 };
 
-export function SendCurrencyPickDropDownMenu({
-  countries,
-  popularCurrencies,
-  setSelectedCurrencies,
-  selectedCurrencies,
-}: Props) {
+export function SendCurrencyPickDropDownMenu({ popularCurrencies }: Props) {
   const [searchCurrency, setSearchCurrency] = useState("");
   const [open, setOpen] = useState(false);
+
+  const { setSelectedCurrencies, countries, selectedCurrencies } =
+    useContext(CurrencyContext);
 
   const handleSendCurrency = (currency: string) => {
     setSelectedCurrencies((prev: CurrenciesData) => ({

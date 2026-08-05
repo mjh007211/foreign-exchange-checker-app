@@ -1,18 +1,12 @@
-import type { CurrenciesData, FavoritedCurrencies } from "@/type";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
+import { useContext } from "react";
+import { CurrencyContext } from "@/context/CurrencyContext";
 
-type Props = {
-  selectedCurrencies: CurrenciesData;
-  rate: number;
-  setFavorited: React.Dispatch<React.SetStateAction<FavoritedCurrencies[]>>;
-};
+export function FavoritedButton() {
+  const { setFavorited, rate, selectedCurrencies } =
+    useContext(CurrencyContext);
 
-export function FavoritedButton({
-  selectedCurrencies,
-  rate,
-  setFavorited,
-}: Props) {
   const handleAddFavorited = () => {
     setFavorited((prev) => {
       const alreadyExists = prev.some(

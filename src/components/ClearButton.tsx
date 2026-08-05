@@ -1,12 +1,13 @@
-import type { LoggedCurrencies } from "@/type";
+import { CurrencyContext } from "@/context/CurrencyContext";
 import { Button } from "@/ui/button";
+import { useContext } from "react";
 import { toast } from "sonner";
 
-type Props = {
-  setLogged: React.Dispatch<React.SetStateAction<LoggedCurrencies[]>>;
-};
+export default function ClearButton() {
 
-export default function ClearButton({ setLogged }: Props) {
+  const { setLogged } = useContext(CurrencyContext);
+
+
   const handleClearLogged = () => {
     const isClear = confirm("Are you sure you want to delete all Logged?");
     if (!isClear) return;

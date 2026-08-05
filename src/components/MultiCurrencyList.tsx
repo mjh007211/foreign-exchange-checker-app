@@ -1,21 +1,20 @@
+import { CurrencyContext } from "@/context/CurrencyContext";
 import { currencyFlags } from "@/countriesFlags";
-import type { FavoritedCurrencies } from "@/type";
+import { useContext } from "react";
 
 type Props = {
-  sendAmount: string;
   currencyName: string;
   currency: string;
   rate: number;
-  favorited: FavoritedCurrencies[];
 };
 
 export default function MultiCurrencyList({
-  favorited,
-  sendAmount,
   currencyName,
   rate,
   currency,
 }: Props) {
+  const { favorited, sendAmount } = useContext(CurrencyContext);
+
   const exchange = Number(sendAmount) * rate;
 
   const isFavorited = favorited.some(

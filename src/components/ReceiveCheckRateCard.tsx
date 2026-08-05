@@ -1,26 +1,11 @@
-import type { CountriesData, CurrenciesData } from "@/type";
 import { ReceiveCurrencyPickDropDownMenu } from "./ReceiveCurrencyPickDropDownMenu";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { CurrencyContext } from "@/context/CurrencyContext";
 
-type Props = {
-  countries: CountriesData[] | null;
-  selectedCurrencies: CurrenciesData;
-  rate: number;
-  sendAmount: string;
-  receiveAmount: number;
-  setReceiveAmount: React.Dispatch<React.SetStateAction<number>>;
-  setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
-};
+export default function ReceiveCheckRateCard() {
+  const { countries, sendAmount, rate, receiveAmount, setReceiveAmount } =
+    useContext(CurrencyContext);
 
-export default function ReceiveCheckRateCard({
-  countries,
-  sendAmount,
-  rate,
-  receiveAmount,
-  setReceiveAmount,
-  setSelectedCurrencies,
-  selectedCurrencies,
-}: Props) {
   const popularCurrencies = countries?.filter(
     ({ iso_code }) =>
       iso_code === "USD" || iso_code === "EUR" || iso_code === "GBP",
@@ -46,10 +31,7 @@ export default function ReceiveCheckRateCard({
           {!receiveAmount ? receiveAmount : receiveAmount.toFixed(2)}
         </span>
         <ReceiveCurrencyPickDropDownMenu
-          countries={countries}
           popularCurrencies={popularCurrencies || null}
-          setSelectedCurrencies={setSelectedCurrencies}
-          selectedCurrencies={selectedCurrencies}
         />
       </div>
     </div>

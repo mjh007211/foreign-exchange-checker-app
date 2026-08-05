@@ -1,10 +1,8 @@
-import type { CurrenciesData } from "@/type";
+import { CurrencyContext } from "@/context/CurrencyContext";
+import { useContext } from "react";
 
-type Props = {
-  setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
-};
-
-export default function SwapButton({ setSelectedCurrencies }: Props) {
+export default function SwapButton() {
+  const { setSelectedCurrencies } = useContext(CurrencyContext);
   const handleSwapCurrencies = () => {
     setSelectedCurrencies((prev) => ({
       sendCurrency: prev.receiveCurrency,

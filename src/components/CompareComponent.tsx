@@ -1,26 +1,12 @@
-import type {
-  BaseCurrencyData,
-  CurrenciesData,
-  CountriesData,
-  FavoritedCurrencies,
-} from "@/type";
+
 import MultiCurrencyList from "./MultiCurrencyList";
+import { CurrencyContext } from "@/context/CurrencyContext";
+import { useContext } from "react";
 
-type Props = {
-  baseCurrency: BaseCurrencyData[];
-  sendAmount: string;
-  selectedCurrencies: CurrenciesData;
-  countries: CountriesData[] | null;
-  favorited: FavoritedCurrencies[];
-};
+export default function CompareComponent() {
+  const { baseCurrency, sendAmount, selectedCurrencies, countries } =
+    useContext(CurrencyContext);
 
-export default function CompareComponent({
-  baseCurrency,
-  sendAmount,
-  selectedCurrencies,
-  countries,
-  favorited,
-}: Props) {
   const ratesByQuote = Object.fromEntries(
     baseCurrency.map((c) => [c.quote, c]),
   );
@@ -55,8 +41,6 @@ export default function CompareComponent({
                 currency={c.iso_code}
                 currencyName={c.name}
                 rate={ratesByQuote[c.iso_code]?.rate}
-                sendAmount={sendAmount}
-                favorited={favorited}
               />
             </li>
           );

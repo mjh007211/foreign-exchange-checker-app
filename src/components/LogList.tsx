@@ -1,4 +1,5 @@
-import type { LoggedCurrencies } from "@/type";
+import { CurrencyContext } from "@/context/CurrencyContext";
+import { useContext } from "react";
 import { toast } from "sonner";
 
 type Props = {
@@ -7,8 +8,6 @@ type Props = {
   loggedReceive: string;
   loggedSendAmount: string;
   loggedReceiveAmount: number;
-  logged: LoggedCurrencies[];
-  setLogged: React.Dispatch<React.SetStateAction<LoggedCurrencies[]>>;
 };
 
 export default function LogList({
@@ -17,9 +16,9 @@ export default function LogList({
   loggedReceive,
   loggedSendAmount,
   loggedReceiveAmount,
-  logged,
-  setLogged,
 }: Props) {
+  const { logged, setLogged } = useContext(CurrencyContext);
+
   const handleDeleteLog = (id: string) => {
     const isDeleted = confirm("Are you sure you want to delete this Log?");
     if (!isDeleted) return;

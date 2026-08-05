@@ -1,11 +1,10 @@
-import type { FavoritedCurrencies } from "@/type";
 import FavoritesList from "./FavoritesList";
+import { CurrencyContext } from "@/context/CurrencyContext";
+import { useContext } from "react";
 
-type Props = {
-  favorited: FavoritedCurrencies[];
-};
+export default function FavoritesComponent() {
+  const { favorited } = useContext(CurrencyContext);
 
-export default function FavoritesComponent({ favorited }: Props) {
   return (
     <div className="bg-neutral-700 p-5 rounded-16 mt-5">
       <div className="flex justify-between">

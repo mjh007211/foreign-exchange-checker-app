@@ -1,21 +1,9 @@
-import type { CountriesData, CurrenciesData } from "@/type";
 import { SendCurrencyPickDropDownMenu } from "./SendCurrencyPickDropDownMenu";
+import { useContext } from "react";
+import { CurrencyContext } from "@/context/CurrencyContext";
 
-type Props = {
-  countries: CountriesData[] | null;
-  selectedCurrencies: CurrenciesData;
-  sendAmount: string;
-  setSendAmount: React.Dispatch<React.SetStateAction<string>>;
-  setSelectedCurrencies: React.Dispatch<React.SetStateAction<CurrenciesData>>;
-};
-
-export default function SendCheckRateCard({
-  countries,
-  sendAmount,
-  setSendAmount,
-  setSelectedCurrencies,
-  selectedCurrencies,
-}: Props) {
+export default function SendCheckRateCard() {
+  const { countries, sendAmount, setSendAmount } = useContext(CurrencyContext);
   const popularCurrencies = countries?.filter(
     ({ iso_code }) =>
       iso_code === "USD" || iso_code === "EUR" || iso_code === "GBP",
@@ -42,10 +30,7 @@ export default function SendCheckRateCard({
           type="text"
         />
         <SendCurrencyPickDropDownMenu
-          countries={countries}
           popularCurrencies={popularCurrencies || null}
-          setSelectedCurrencies={setSelectedCurrencies}
-          selectedCurrencies={selectedCurrencies}
         />
       </div>
     </div>
